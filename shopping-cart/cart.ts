@@ -2,6 +2,13 @@ type CartItem = { name: string; price: number };
 
 type ShoppingCart = CartItem[];
 
+function makeCartItem(name: string, price: number): CartItem {
+  return {
+    name,
+    price,
+  };
+}
+
 function addItemToCart(
   cart: CartItem[],
   { name, price }: CartItem,

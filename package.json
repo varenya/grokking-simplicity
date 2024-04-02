@@ -1,0 +1,17 @@
+{
+  "name": "grokking-simplicity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "1.5.1",
+    "prettier": "^3.2.1",
+    "vitest": "^1.4.0"
+  }
+}
