@@ -3,15 +3,16 @@ import {
   calculateTax,
   calculateTotal,
   ShoppingCart,
+  removeItemFromCart,
 } from "./cart";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 
 const carts: ShoppingCart[] = [
-  [
-    { name: "dove", price: 20 },
-    { name: "axe", price: 10 },
-  ],
-  [],
+  new Map([
+    ["dove", 20],
+    ["axe", 10],
+  ]),
+  new Map([]),
 ];
 
 const totalTable = [
@@ -52,4 +53,18 @@ describe("Shopping Cart", () => {
       expect(isFreeShipping(cart)).toEqual(expected);
     },
   );
+});
+
+describe("remove item from cart", () => {
+  let cart: ShoppingCart;
+  beforeEach(() => {
+    cart = new Map([
+      ["dove", 20],
+      ["axe", 10],
+    ]);
+  });
+  it("should remove an item from cart using the given name", () => {
+    const updatedCart = removeItemFromCart(cart, "axe");
+    expect(updatedCart).toHaveLength(1);
+  });
 });

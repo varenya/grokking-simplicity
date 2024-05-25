@@ -1,6 +1,6 @@
 type CartItem = { name: string; price: number };
 
-type ShoppingCart = CartItem[];
+type ShoppingCart = Map<string, number>;
 
 function makeCartItem(name: string, price: number): CartItem {
   return {
@@ -16,18 +16,28 @@ function addItemToCart(
   return [...cart, { name, price }];
 }
 
-function calculateTotal(cart: CartItem[]): number {
-  return cart.reduce((acc, curr) => {
-    return acc + curr.price;
+function isInCart(cart: ShoppingCart, { name, price }: CartItem): boolean {
+  return cart.has(name);
+}
+
+function removeItemFromCart(cart: ShoppingCart, name: string): ShoppingCart {
+  const newCart = new Map(cart);
+  newCart.delete(name);
+  return newCart;
+}
+
+function calculateTotal(cart: ShoppingCart): number {
+  return [...cart.values()].reduce((acc, curr) => {
+    return acc + curr;
   }, 0);
 }
 
-function isFreeShipping(cart: CartItem[]): boolean {
+function isFreeShipping(cart: ShoppingCart): boolean {
   const currTotal = calculateTotal(cart);
   return currTotal >= 20;
 }
 
-function calculateTax(cart: CartItem[], taxRate = 10): number {
+function calculateTax(cart: ShoppingCart, taxRate = 10): number {
   const currTotal = calculateTotal(cart);
   return (currTotal * taxRate) / 100;
 }
@@ -37,6 +47,7 @@ export {
   calculateTax,
   isFreeShipping,
   calculateTotal,
+  removeItemFromCart,
   type ShoppingCart,
   type CartItem,
 };
