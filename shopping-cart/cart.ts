@@ -16,7 +16,7 @@ function addItemToCart(
   return [...cart, { name, price }];
 }
 
-function isInCart(cart: ShoppingCart, { name, price }: CartItem): boolean {
+function isInCart(cart: ShoppingCart, { name }: CartItem): boolean {
   return cart.has(name);
 }
 
@@ -48,6 +48,8 @@ export {
   isFreeShipping,
   calculateTotal,
   removeItemFromCart,
+  isInCart,
+  makeCartItem,
   type ShoppingCart,
   type CartItem,
 };
